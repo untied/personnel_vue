@@ -1,0 +1,92 @@
+<el-main>
+    <h1>
+        <span>Employee List</span>
+        <el-button size="mini" type="info" icon="el-icon-plus" @click="createEmployee()">Create</el-button>
+    </h1>
+    <section class="table">
+        <el-row class="el-row__header">
+            <el-col :lg="2" :xl="3" class="hidden-md-and-down">ID</el-col>
+            <el-col :xs="8" :sm="5" :md="5" :lg="5" :xl="6">Full Name</el-col>
+            <el-col :sm="9" :md="9" :lg="8" :xl="7" class="hidden-xs-only">Additional Info</el-col>
+            <el-col :xs="10" :sm="6" :md="5" :lg="4" :xl="4">Task Progress</el-col>
+            <el-col :xs="6" :sm="4" :md="5" :lg="5" :xl="4">Actions</el-col>
+        </el-row>
+        <template v-if="employees.length > 0">
+            <el-row v-for="(empl, index) in employees" :key="'empl-' + index">
+                <el-col :lg="2" :xl="3" class="hidden-md-and-down">{{empl.id}}</el-col>
+                <el-col :xs="8" :sm="5" :md="5" :lg="5" :xl="6">{{empl.lastName}},<br class="hidden-sm-and-up" /> {{empl.firstName}}</el-col>
+                <el-col :sm="9" :md="9" :lg="8" :xl="7" class="hidden-xs-only">
+                    <el-row>
+                        <el-col :md="8" :lg="8" :xl="10" class="hidden-sm-and-down">
+                            <strong>Position</strong>
+                        </el-col>
+                        <el-col :sm="24" :md="16" :lg="16" :xl="14">{{empl.position}}</el-col>
+                        <el-col :md="8" :lg="8" :xl="10" class="hidden-sm-and-down">
+                            <strong>Gender</strong>
+                        </el-col>
+                        <el-col :sm="24" :md="16" :lg="16" :xl="14">{{getGender(empl.gender)}}</el-col>
+                        <el-col :md="8" :lg="8" :xl="10" class="hidden-sm-and-down">
+                            <strong>Email</strong>
+                        </el-col>
+                        <el-col :sm="24" :md="16" :lg="16" :xl="14">{{empl.email}}</el-col>
+                        <el-col :md="8" :lg="8" :xl="10" class="hidden-sm-and-down">
+                            <strong>Salary</strong>
+                        </el-col>
+                        <el-col :sm="24" :md="16" :lg="16" :xl="14">{{empl.salary}} &euro;</el-col>
+                    </el-row>
+                </el-col>
+                <el-col :xs="10" :sm="6" :md="5" :lg="4" :xl="4">
+                    <a href="javascript:void(0)" @click="openTaskProgressForEmployee(empl.id)">
+                        Total: {{empl.taskCount.total}} / Completed: {{empl.taskCount.completed}}
+                    </a>
+                </el-col>
+                <el-col :xs="6" :sm="4" :md="5" :lg="5" :xl="4">
+                    <div class="hidden-sm-and-down">
+                        <el-button size="mini" type="success" icon="el-icon-edit" title="Edit" circle @click="modifyEmployee(empl.id)"></el-button>
+                        <el-button size="mini" type="primary" icon="el-icon-user" title="Contract" circle @click="viewEmployeeContract(empl.id)"></el-button>
+                        <el-button size="mini" type="warning" icon="el-icon-tickets" title="Tasks" circle @click="assignTasksForEmployee(empl.id)"></el-button>
+                        <el-button size="mini" type="danger" icon="el-icon-close" title="Delete" circle @click="deleteEmployee(empl.id)"></el-button>
+                    </div>
+                    <div class="hidden-md-and-up">
+                        <el-button size="mini" type="success" icon="el-icon-edit" title="Edit" circle @click="modifyEmployee(empl.id)"></el-button>
+                        <el-button size="mini" type="danger" icon="el-icon-close" title="Delete" circle @click="deleteEmployee(empl.id)"></el-button>
+                        <div class="action-separator"></div>
+                        <el-button size="mini" type="primary" icon="el-icon-user" title="Contract" circle @click="viewEmployeeContract(empl.id)"></el-button>
+                        <el-button size="mini" type="warning" icon="el-icon-tickets" title="Tasks" circle @click="assignTasksForEmployee(empl.id)"></el-button>
+                    </div>
+                </el-col>
+            </el-row>
+        </template>
+        <template v-else>
+            <el-row> <el-col :span="24">The employee list is empty!</el-col> </el-row>
+        </template>
+    </section>
+    <el-dialog title="Task Progress" width="470px" :visible.sync="taskProgressVisible" class="task-progress">
+        <el-row type="flex" align="middle" v-for="(et, index) in employeeTasks">
+            <el-col :span="3">
+                <el-button
+                    size="mini"
+                    type="primary"
+                    icon="el-icon-check"
+                    circle
+                    v-if="et.isCompleted"
+                    @click="toggleTaskCompleteness(et.employeeId, et.taskId)"
+                ></el-button>
+                <el-button
+                    size="mini"
+                    type="info"
+                    icon="el-icon-minus"
+                    circle
+                    plain
+                    v-else
+                    @click="toggleTaskCompleteness(et.employeeId, et.taskId)"
+                ></el-button>
+            </el-col>
+            <el-col :span="21">{{et.task.name}}</el-col>
+        </el-row>
+        <span slot="footer" class="dialog-footer">
+            <el-button size="mini" type="info" icon="el-icon-close" plain @click="taskProgressVisible = false">Cancel</el-button>
+            <el-button size="mini" type="success" icon="el-icon-check" @click="setTaskCompleteness()">Confirm</el-button>
+        </span>
+    </el-dialog>
+</el-main>

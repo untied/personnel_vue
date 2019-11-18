@@ -1,0 +1,36 @@
+<el-main>
+    <h1>
+        <span v-if="task.id === 0">Create New Task</span>
+        <span v-else>Modify Selected Task</span>
+    </h1>
+    <el-row>
+        <el-col :md="2" :lg="5" :xl="7" class="hidden-sm-and-down">&zwj;</el-col>
+        <el-col :xs="24" :sm="24" :md="20" :lg="14" :xl="10">
+            <el-form
+                ref="task-edit"
+                :model="task"
+                :rules="taskRules"
+                label-width="180px"
+            >
+                <el-form-item label="Name" prop="name">
+                    <el-input type="text" v-model="task.name"></el-input>
+                </el-form-item>
+                <el-form-item label="Priority" prop="priority">
+                    <el-input type="text" v-model="task.priority"></el-input>
+                </el-form-item>
+                <el-form-item label="Description" prop="description">
+                    <el-input
+                        type="textarea"
+                        :rows="3"
+                        v-model="task.description"
+                    ></el-input>
+                </el-form-item>
+            </el-form>
+            <div class="el-form__footer">
+                <el-button size="mini" type="info" icon="el-icon-close" plain @click="cancel()">Cancel</el-button>
+                <el-button size="mini" type="success" icon="el-icon-check" @click="submit()">Confirm</el-button>
+            </div>
+        </el-col>
+        <el-col :md="2" :lg="5" :xl="7" class="hidden-sm-and-down">&zwj;</el-col>
+    </el-row>
+</el-main>

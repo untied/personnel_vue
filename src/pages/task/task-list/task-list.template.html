@@ -1,0 +1,30 @@
+<el-main>
+    <h1>
+        <span>Task List</span>
+        <el-button size="mini" type="info" icon="el-icon-plus" @click="createTask()">Create</el-button>
+    </h1>
+    <section class="table">
+        <el-row class="el-row__header">
+            <el-col :lg="2" :xl="3" class="hidden-md-and-down">ID</el-col>
+            <el-col :xs="6" :sm="4" :md="2" :lg="2" :xl="3">Priority</el-col>
+            <el-col :xs="12" :sm="16" :md="6" :lg="6" :xl="4">Name</el-col>
+            <el-col :md="12" :lg="11" :xl="11" class="hidden-sm-and-down">Description</el-col>
+            <el-col :xs="6" :sm="4" :md="4" :lg="3" :xl="3">Actions</el-col>
+        </el-row>
+        <template v-if="tasks.length > 0">
+            <el-row v-for="(task, index) in tasks" :key="'task-' + index">
+                <el-col :lg="2" :xl="3" class="hidden-md-and-down">{{task.id}}</el-col>
+                <el-col :xs="6" :sm="4" :md="2" :lg="2" :xl="3">{{task.priority}}</el-col>
+                <el-col :xs="12" :sm="16" :md="6" :lg="6" :xl="4">{{task.name}}</el-col>
+                <el-col :md="12" :lg="11" :xl="11" class="hidden-sm-and-down">{{task.description}}</el-col>
+                <el-col :xs="6" :sm="4" :md="4" :lg="3" :xl="3">
+                    <el-button size="mini" type="success" icon="el-icon-edit" title="Edit" circle @click="modifyTask(task.id)"></el-button>
+                    <el-button size="mini" type="danger" icon="el-icon-close" title="Delete" circle @click="deleteTask(task.id)"></el-button>
+                </el-col>
+            </el-row>
+        </template>
+        <template v-else>
+            <el-row> <el-col :span="24">The task list is empty!</el-col> </el-row>
+        </template>
+    </section>
+</el-main>

@@ -1,0 +1,30 @@
+{
+    "defaultSeverity": "warning",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "linterOptions": {
+        "exclude": [
+          "node_modules/**"
+        ]
+    },
+    "rules": {
+        "quotemark": [true, "single"],
+        "indent": [true, "spaces", 2],
+        "interface-name": false,
+        "max-line-length": [
+            true, {
+              "limit": 140
+            }
+        ],
+        "ordered-imports": false,
+        "object-literal-sort-keys": false,
+        "one-variable-per-declaration": false,
+        "no-consecutive-blank-lines": false,
+        "trailing-comma": false,
+        "typedef-whitespace": false,
+        "variable-name": false,
+        "no-console": [true, "info", "warning"],
+        "prefer-for-of": false
+    }
+}

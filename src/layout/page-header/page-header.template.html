@@ -1,0 +1,18 @@
+<el-header>
+    <div class="el-header__title" @click="navigateTo('employee-list')">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        <span class="hidden-xs-only">&nbsp;Personnel Management</span>
+        <span class="hidden-sm-and-up" title="Personal Management">&nbsp;PM</span>
+    </div>
+    <el-menu
+        class="float-right"
+        mode="horizontal"
+        background-color="#aa0022"
+        text-color="#ddd"
+        active-text-color="#fff"
+        :default-active="activeIndex"
+    >
+        <el-menu-item index="1" @click="navigateTo('employee-list')">Employees</el-menu-item>
+        <el-menu-item index="2" @click="navigateTo('task-list')">Tasks</el-menu-item>
+    </el-menu>
+</el-header>

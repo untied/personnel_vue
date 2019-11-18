@@ -1,0 +1,42 @@
+<el-main>
+    <h1>
+        <span v-if="empl.id === 0">Create New Employee</span>
+        <span v-else>Modify Selected Employee</span>
+    </h1>
+    <el-row>
+        <el-col :md="2" :lg="5" :xl="7" class="hidden-sm-and-down">&zwj;</el-col>
+        <el-col :xs="24" :sm="24" :md="20" :lg="14" :xl="10">
+            <el-form
+                ref="employee-edit"
+                :model="empl"
+                :rules="employeeRules"
+                label-width="180px"
+            >
+                <el-form-item label="First Name" prop="firstName">
+                    <el-input type="text" v-model="empl.firstName"></el-input>
+                </el-form-item>
+                <el-form-item label="Last Name" prop="lastName">
+                    <el-input type="text" v-model="empl.lastName"></el-input>
+                </el-form-item>
+                <el-form-item label="Gender" prop="gender">
+                    <el-radio v-model="empl.gender" :label="EmployeeGender.MALE">Male</el-radio>
+                    <el-radio v-model="empl.gender" :label="EmployeeGender.FEMALE">Female</el-radio>
+                </el-form-item>
+                <el-form-item label="Email" prop="email">
+                    <el-input type="text" v-model="empl.email"></el-input>
+                </el-form-item>
+                <el-form-item label="Position" prop="position">
+                    <el-input type="text" v-model="empl.position"></el-input>
+                </el-form-item>
+                <el-form-item label="Salary" prop="salary">
+                    <el-input type="text" v-model="empl.salary"></el-input>
+                </el-form-item>
+            </el-form>
+            <div class="el-form__footer">
+                <el-button size="mini" type="info" icon="el-icon-close" plain @click="cancel()">Cancel</el-button>
+                <el-button size="mini" type="success" icon="el-icon-check" @click="submit()">Confirm</el-button>
+            </div>
+        </el-col>
+        <el-col :md="2" :lg="5" :xl="7" class="hidden-sm-and-down">&zwj;</el-col>
+    </el-row>
+</el-main>
