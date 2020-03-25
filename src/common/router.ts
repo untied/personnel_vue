@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 import EmployeeListComponent from '@/pages/employee/employee-list/employee-list.vue';
 import EmployeeEditComponent from '@/pages/employee/employee-edit/employee-edit.vue';
 import EmployeeTaskComponent from '@/pages/employee/employee-task/employee-task.vue';
-import EmployeeCardComponent from '@/pages/employee/employee-card/employee-card.vue';
+
 import TaskListComponent from '@/pages/task/task-list/task-list.vue';
 import TaskEditComponent from '@/pages/task/task-edit/task-edit.vue';
 
@@ -31,11 +31,6 @@ const routes: any = [
         path      : '/employee/modify/:id',
         name      : 'employee-modify',
         component : EmployeeEditComponent
-    },
-    {
-        path      : '/employee/card/:id',
-        name      : 'employee-card',
-        component : EmployeeCardComponent
     },
     {
         path      : '/employee/tasks/:id',

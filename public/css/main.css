@@ -81,6 +81,16 @@ footer.el-footer {
     align-items: center;
 }
 
+footer.el-footer > .avatar {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: transparent url('/untied.png') center center;
+    background-size: contain;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
 section.table {
     background-color: #fff;
 }

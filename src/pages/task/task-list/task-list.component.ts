@@ -28,7 +28,11 @@ export default class TaskListComponent extends Vue {
 
     // delete the selected task
     public deleteTask(id: number): void {
-        if (window.confirm('Are you sure you want to delete the selected task?')) {
+        this.$confirm('Are you sure you want to delete the selected task?', 'Confirmation required', {
+            type              : 'warning',
+            confirmButtonText : 'OK',
+            cancelButtonText  : 'Cancel'
+        }).then(() => {
             this.$api.deleteTask(id)
                 .then((result: boolean): void => {
                     if (result) {
@@ -43,7 +47,7 @@ export default class TaskListComponent extends Vue {
                 .catch((err: any): void => {
                     console.error('Unable to delete the selected task!');
                 });
-        }
+        });
     }
 
     // load the list of tasks from the database

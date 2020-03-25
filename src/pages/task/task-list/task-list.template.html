@@ -18,8 +18,8 @@
                 <el-col :xs="12" :sm="16" :md="6" :lg="6" :xl="4">{{task.name}}</el-col>
                 <el-col :md="12" :lg="11" :xl="11" class="hidden-sm-and-down">{{task.description}}</el-col>
                 <el-col :xs="6" :sm="4" :md="4" :lg="3" :xl="3">
-                    <el-button size="mini" type="success" icon="el-icon-edit" title="Edit" circle @click="modifyTask(task.id)"></el-button>
-                    <el-button size="mini" type="danger" icon="el-icon-close" title="Delete" circle @click="deleteTask(task.id)"></el-button>
+                    <el-button size="mini" type="success" icon="el-icon-edit" title="Edit task" circle @click="modifyTask(task.id)"></el-button>
+                    <el-button size="mini" type="danger" icon="el-icon-close" title="Delete task" circle @click="deleteTask(task.id)"></el-button>
                 </el-col>
             </el-row>
         </template>

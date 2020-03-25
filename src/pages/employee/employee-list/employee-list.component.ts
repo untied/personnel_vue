@@ -51,19 +51,13 @@ export default class EmployeeListComponent extends Vue {
         });
     }
 
-    // view a contract of selected employee
-    public viewEmployeeContract(id: number): void {
-        this.$router.push({
-            name   : 'employee-card',
-            params : {
-                id: id.toString()
-            }
-        });
-    }
-
     // delete the selected employee
     public deleteEmployee(id: number): void {
-        if (window.confirm('Are you sure you want to delete the selected employee?')) {
+        this.$confirm('Are you sure you want to delete the selected employee?', 'Confirmation required', {
+            type              : 'warning',
+            confirmButtonText : 'OK',
+            cancelButtonText  : 'Cancel'
+        }).then(() => {
             this.$api.deleteEmployee(id)
                 .then((result: boolean): void => {
                     if (result) {
@@ -78,7 +72,7 @@ export default class EmployeeListComponent extends Vue {
                 .catch((err: any): void => {
                     console.error('Unable to delete the selected employee!');
                 });
-        }
+        });
     }
 
     // assign tasks for the selected employee

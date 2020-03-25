@@ -87,9 +87,12 @@ export class DataBase {
 
     // remove a task by the specified id
     public static deleteTask(id: number): boolean {
-        const index: number = DataBase.TABLE_TASKS.findIndex((t: ITaskRecord): boolean => t.id === id);
+        let index: number = DataBase.TABLE_TASKS.findIndex((t: ITaskRecord): boolean => t.id === id);
         if (index >= 0) {
             DataBase.TABLE_TASKS.splice(index, 1);
+            while ((index = DataBase.TABLE_EMPLOYEE_TASKS.findIndex((et: IEmployeeTaskRecord): boolean => et.taskId === id)) !== -1) {
+                DataBase.TABLE_EMPLOYEE_TASKS.splice(index, 1);
+            }
             return true;
         } else {
             return false;
@@ -163,9 +166,12 @@ export class DataBase {
 
     // remove an employee by the specified id
     public static deleteEmployee(id: number): boolean {
-        const index: number = DataBase.TABLE_EMPLOYEES.findIndex((e: IEmployeeRecord): boolean => e.id === id);
+        let index: number = DataBase.TABLE_EMPLOYEES.findIndex((e: IEmployeeRecord): boolean => e.id === id);
         if (index >= 0) {
             DataBase.TABLE_EMPLOYEES.splice(index, 1);
+            while ((index = DataBase.TABLE_EMPLOYEE_TASKS.findIndex((et: IEmployeeTaskRecord): boolean => et.employeeId === id)) !== -1) {
+                DataBase.TABLE_EMPLOYEE_TASKS.splice(index, 1);
+            }
             return true;
         } else {
             return false;
@@ -329,24 +335,121 @@ export class DataBase {
 
     // employees to task table
     private static TABLE_EMPLOYEE_TASKS: IEmployeeTaskRecord[] = [
+        // Peter Jones - SQL Programmer
         {
             employeeId  : 1,
             taskId      : 1,
             isCompleted : true
         },
         {
+            employeeId  : 1,
+            taskId      : 2,
+            isCompleted : true
+        },
+        {
+            employeeId  : 1,
+            taskId      : 4,
+            isCompleted : true
+        },
+        {
+            employeeId  : 1,
+            taskId      : 5,
+            isCompleted : false
+        },
+        {
+            employeeId  : 1,
+            taskId      : 6,
+            isCompleted : false
+        },
+        {
+            employeeId  : 1,
+            taskId      : 7,
+            isCompleted : false
+        },
+
+        // Zuzanna Tartakowski - Product Manager
+        {
             employeeId  : 2,
             taskId      : 1,
             isCompleted : true
         },
         {
+            employeeId  : 2,
+            taskId      : 2,
+            isCompleted : true
+        },
+        {
+            employeeId  : 2,
+            taskId      : 5,
+            isCompleted : false
+        },
+        {
+            employeeId  : 2,
+            taskId      : 6,
+            isCompleted : false
+        },
+
+        // Fatih Mindashvurti - PHP Team Leader
+        {
             employeeId  : 3,
             taskId      : 1,
+            isCompleted : true
+        },
+        {
+            employeeId  : 3,
+            taskId      : 2,
+            isCompleted : true
+        },
+        {
+            employeeId  : 3,
+            taskId      : 3,
+            isCompleted : false
+        },
+        {
+            employeeId  : 3,
+            taskId      : 4,
+            isCompleted : true
+        },
+        {
+            employeeId  : 3,
+            taskId      : 5,
+            isCompleted : true
+        },
+        {
+            employeeId  : 3,
+            taskId      : 6,
+            isCompleted : false
+        },
+        {
+            employeeId  : 3,
+            taskId      : 7,
+            isCompleted : false
+        },
+
+        // Alisha Yeng - PHP Junior Developer
+        {
+            employeeId  : 4,
+            taskId      : 1,
+            isCompleted : true
+        },
+        {
+            employeeId  : 4,
+            taskId      : 2,
             isCompleted : false
         },
         {
             employeeId  : 4,
-            taskId      : 1,
+            taskId      : 3,
+            isCompleted : false
+        },
+        {
+            employeeId  : 4,
+            taskId      : 4,
+            isCompleted : false
+        },
+        {
+            employeeId  : 4,
+            taskId      : 5,
             isCompleted : false
         }
     ];
